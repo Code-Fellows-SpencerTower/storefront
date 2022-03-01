@@ -16,8 +16,8 @@ function Categories() {
     activeProduct: {},
   }
 
-  
-  function categoriesReducer(state, action) {
+
+  function categoryReducer(state = initialState, action) {
     let { type, payload } = action;
     switch (type) {
       case 'ADD_PRODUCT':
