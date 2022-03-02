@@ -29,3 +29,7 @@
 - Active Category
   - State should store active category
   - Other components (products, etc) might need to reference this
+
+## Resources
+
+- Dev Ed

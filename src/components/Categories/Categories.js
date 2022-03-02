@@ -1,41 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
+import { connect } from "react-redux";
 
-function Categories() {
-
-  // categories reducer
-  let [categories, setCategories] = useState();
-
-  const initialState = {
-    categories: [],
-    products: [
-      { shoes: 'Nike' },
-      { shoes: 'Adidas' },
-      { jacket: 'Patagonia' },
-      { jacket: 'North Face' },
-    ],
-    activeProduct: {},
-  }
-
-
-  function categoryReducer(state = initialState, action) {
-    let { type, payload } = action;
-    switch (type) {
-      case 'ADD_PRODUCT':
-        return { ...state, products: [...state.product, payload] }
-    }
-  }
+function Categories(props) {
 
   return (
     <>
+      <section id="categories">
+        {props.categories.map(category => {
+          return (
+            <p>{category.displayName}</p>
+          )
+        })}
+      </section>
+      <button onClick={() => { }}>Filter</button>
     </>
   );
 }
 
-export const addProduct = (product) => {
+const mapStateToProps = (state) => {
   return {
-    type: 'ADD_PRODUCT',
-    payload: product,
+    categories: state.categories,
   }
 }
 
-export default Categories;
+
+export default connect(mapStateToProps)(Categories);
