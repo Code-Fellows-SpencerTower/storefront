@@ -6,9 +6,9 @@ function Categories(props) {
   return (
     <>
       <section id="categories">
-        {props.categories.map(category => {
+        {props.categories.map((category, key) => {
           return (
-            <p>{category.displayName}</p>
+            <p key={key}>{category.displayName}</p>
           )
         })}
       </section>
