@@ -13,14 +13,19 @@ let reducers = combineReducers({
   categoryReducer,
 });
 
-export default function createReduxStore() {
+// export default function createReduxStore() {
+//   return createStore(reducers, composeWithDevTools());
+// }
+
+const createReduxStore = () => {
   return createStore(reducers, composeWithDevTools());
 }
 
+export default createReduxStore();
 
 
 
-// REDUCER
+// // REDUCER
 // import storeReducer from "./storeReducer";
 
 // // combine reducers in index, then create the redux store by passing the reducers into createStore
