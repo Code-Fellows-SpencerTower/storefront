@@ -1,27 +1,39 @@
 import React from "react";
 import { connect } from "react-redux";
+import { activateCategory } from '../../store/storeReducer'
 
+// can do Categories({categories}) to deconstruct categories directly out of props
 function Categories(props) {
+
+  console.log('CATEGORIES COMPONENT PROPS', props);
 
   return (
     <>
       <section id="categories">
-        {props.categories.map((category, key) => {
+        <h2>{props.activeCategory}</h2>
+        {props.categories.map((category) => {
           return (
-            <p key={key}>{category.displayName}</p>
+            <button onClick={() => props.activateCategory(category)} key={category.normalizedName}>{category.displayName}</button>
           )
         })}
       </section>
-      <button onClick={() => { }}>Filter</button>
     </>
   );
 }
 
+const action = {type: 'ACTIVE_CATEGORY', payload: category.normalizedName}
+
+
+
 const mapStateToProps = (state) => {
   return {
     categories: state.categories,
+    activeCategory: state.activeCategory,
   }
 }
 
+const mapDispatchToProps = {
+  activateCategory
+}
 
-export default connect(mapStateToProps)(Categories);
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);
