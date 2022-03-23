@@ -1,19 +1,28 @@
 import React from "react";
-import { connect } from "react-redux";
-import { activateCategory } from '../../store/storeReducer'
+import { useDispatch, useSelector } from "react-redux";
+import { changeCategory } from '../../store/categories.store';
+
 
 // can do Categories({categories}) to deconstruct categories directly out of props
 function Categories(props) {
 
-  console.log('CATEGORIES COMPONENT PROPS', props);
+  // console.log('CATEGORIES COMPONENT PROPS', props);
+
+  const { categories, activeCategory } = useSelector(store => store.categories);
+  const dispatch = useDispatch();
+
+  console.log('CATEGORIES', categories);
+  console.log('ACTIVE CATEGORY', activeCategory);
+  console.log('CHANGE CATEGORY', changeCategory('jackets'));
+
 
   return (
     <>
       <section id="categories">
-        <h2>{props.activeCategory}</h2>
-        {props.categories.map((category) => {
+        <h2>{activeCategory.displayName}</h2>
+        {categories.map((category, key) => {
           return (
-            <button onClick={() => props.activateCategory(category)} key={category.normalizedName}>{category.displayName}</button>
+            <button onClick={() => dispatch(changeCategory(category))} key={key}>{category.displayName}</button>
           )
         })}
       </section>
@@ -21,19 +30,17 @@ function Categories(props) {
   );
 }
 
-const action = {type: 'ACTIVE_CATEGORY', payload: category.normalizedName}
+export default Categories;
 
+// const mapStateToProps = (state) => {
+//   return {
+//     categories: state.categories,
+//     activeCategory: state.activeCategory,
+//   }
+// }
 
+// const mapDispatchToProps = {
+//   activateCategory
+// }
 
-const mapStateToProps = (state) => {
-  return {
-    categories: state.categories,
-    activeCategory: state.activeCategory,
-  }
-}
-
-const mapDispatchToProps = {
-  activateCategory
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Categories);
+// export default connect(mapStateToProps, mapDispatchToProps)(Categories);

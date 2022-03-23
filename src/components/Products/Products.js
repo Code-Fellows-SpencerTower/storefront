@@ -1,5 +1,7 @@
 import React from "react";
-import { connect, useSelector } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import store from "../../store";
+import './products.css'
 
 function Products(props) {
 
@@ -7,7 +9,16 @@ function Products(props) {
 
   console.log('PRODUCTS PROPS', props);
 
-  const products = useSelector(state => state.products);
+  const { activeCategory } = useSelector(store => store.categories);
+
+  const products = useSelector(store => {
+    return activeCategory.displayName ?
+      store.products.filter((product) => {
+        return product.category === activeCategory.normalizedName
+      })
+      : store.products;
+  })
+
   console.log('useSelector PRODUCTS', products);
 
 
@@ -15,7 +26,7 @@ function Products(props) {
     <section id="products">
       {products.map((product, key) => {
         return (
-          <div key={key}>
+          <div class={'product'} key={product.name}>
             <p>{product.name}</p>
             <p>{product.description}</p>
             <p>{product.category}</p>

@@ -21,6 +21,9 @@ const cartReducer = (state = initialState, action) => {
       console.log('New State', newState);
       return { ...state, cart: [...state.cart, payload] }
     // TODO: Add REMOVE_ITEM case
+    case ('REMOVE_ITEM'):
+      // update state to include products that do not include the product name of the one to be deleted
+      return { ...state, cart: state.cart.filter(product => product.name !== payload.name) }
     default:
       return state;
   }
