@@ -8,9 +8,9 @@ import { addItem } from "./cart.store";
 
 // pass reducers into combineReducers()
 let reducers = combineReducers({
-  cartReducer,
-  productReducer,
-  categoryReducer,
+  cart: cartReducer,
+  products: productReducer,
+  categories: categoryReducer,
 });
 
 // export default function createReduxStore() {

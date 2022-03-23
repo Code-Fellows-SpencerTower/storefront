@@ -11,13 +11,14 @@ const initialState = {
       displayName: 'Jackets',
     }
   ],
-  activeCategory: '',
+  activeCategory: {},
 }
 
 const categoryReducer = (state = initialState, action) => {
+  console.log('ACTION', action);
   let { type, payload } = action;
   switch (type) {
-    case 'ACTIVE_CATEGORY':
+    case 'CHANGE_CATEGORY':
       // set action.payload to active category
       // return state.activeCategory = payload.categories.normalizedName;
       return { ...state, activeCategory: payload }
@@ -26,8 +27,11 @@ const categoryReducer = (state = initialState, action) => {
   }
 }
 
-const addCategory = () => {
-  
+export const changeCategory = (category) => {
+  return {
+    type: 'CHANGE_CATEGORY',
+    payload: category,
+  }
 }
 
 export default categoryReducer;
